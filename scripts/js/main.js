@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function(){
         //console.log(inputValue);
         addTask(inputValue);
         displayTasks();
+        inputValue = document.querySelector('#input').value = '';
     });
 })
 
