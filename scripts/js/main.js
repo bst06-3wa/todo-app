@@ -47,8 +47,15 @@ function displayTasks(){
     if(storedTasks !== null){
         let length = storedTasks.length;
         //console.log(length);
+        app.innerHTML = ""; //permet de vider le contenu de la div app avant la génération de toute les tâches à chaque appel de la fonction.
         for(let i = 0; i<length; i++){
             app.insertAdjacentHTML('afterbegin', '<li class="task task-container"><div class="check-text"><input type="checkbox" class="checkbox"><p>' + storedTasks[i]['taskDefinition'] + '</p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div></li>')
         }
+        // for(let task of storedTasks){
+        //     let li = document.createElement('li');
+        //     li.classList.add('task', 'task-container');
+        //     li.innerHTML = `<div class="check-text"><input type="checkbox" class="checkbox"><p> ${task['taskDefinition']} </p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div>`;
+        //     app.appendChild(li);
+        //}
     }
 }
