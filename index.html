@@ -3,24 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+    <link rel="stylesheet" href="scripts/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo-app</title>
 </head>
 <body>
     <header>
-
+        <h1>Todo App</h1>
     </header>
-    <main>
+    <main class="container">
+        <div class="add-task task-container">
+            <i class="fas fa-plus" id='add'></i>
+            <input type="text" placeholder="Add a task" id='input'>
+        </div>
         <div id="app">
-            <form>
-                <input type="text" id="input">
-                <button type="submit" id="add">Ajout</button>
-            </form>
-    
+           <li class="task task-container">
+               <div class="check-text">
+                   <input type="checkbox" class="checkbox">
+                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt quia illum aliquam, minima soluta libero fuga natus temporibus minus veniam eius accusantium unde maxime deleniti suscipit reprehenderit tenetur repellendus saepe.</p>
+               </div>
+               <div class="trash-content">
+                    <i class="far fa-trash-alt"></i>
+               </div>
+           </li>
         </div>
     </main>
     <footer>
-
+        <p>© 2021 Designé et développé par <a href="https://github.com/Lepatron973">Lepatron973</a> et <a href="https://github.com/CoralieCC">CoralieCC</a>, Inc. Tous droits réservés</p>
     </footer>
     <script src="scripts/js/main.js"></script>
 </body>

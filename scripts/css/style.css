@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond&family=Oxygen&display=swap");
+header {
+  background-color: #71ae8C;
+  text-align: center;
+}
+
+body {
+  background: -webkit-gradient(linear, left top, right top, from(#9bb885), color-stop(#d5e6c8), to(#d6a978));
+  background: linear-gradient(0.25turn, #9bb885, #d5e6c8, #d6a978);
+}
+
+body .container {
+  max-width: 400px;
+  margin: auto;
+  padding: 0 1rem;
+}
+
+body .container .task-container {
+  background-color: #3f87a6;
+  padding: 1rem  0;
+  margin: .3rem 0;
+  border-radius: .2rem;
+}
+
+body .container .add-task {
+  background-color: #9bb885;
+  margin-top: 1rem;
+  padding-left: 0.4rem;
+}
+
+body .container .add-task i {
+  max-width: 5%;
+  margin: 0 0.4rem;
+  cursor: pointer;
+}
+
+body .container .add-task input {
+  background-color: #9bb885;
+  width: 85%;
+  border: none;
+  padding: .4rem;
+}
+
+body .container .add-task input:focus {
+  outline: none;
+}
+
+body .container #app {
+  max-height: 500px;
+  overflow: auto;
+}
+
+body .container #app .task {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+body .container #app .task .check-text {
+  padding-left: 0.4rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body .container #app .task .check-text .checkbox {
+  margin: 0 0.4rem;
+  border-radius: 1rem;
+}
+
+body .container #app .task .check-text p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: absolute;
+  max-width: 80%;
+  left: 2rem;
+  bottom: 1.1rem;
+}
+
+body .container #app .task .trash-content {
+  -ms-flex-preferred-size: 2%;
+      flex-basis: 2%;
+  padding-right: 1rem;
+  margin-left: 1rem;
+  color: brown;
+  cursor: pointer;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 1rem;
+  padding: 1rem;
+  text-align: center;
+  background-color: #71ae8C;
+}
+
+* {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: 'EB Garamond', serif;
+}
+
+* html {
+  font-size: 62.5%;
+}
+
+* html body {
+  font-size: 1.5rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+/*# sourceMappingURL=style.css.map */
