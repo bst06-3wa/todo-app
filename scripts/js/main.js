@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use strict'
 //  id input = "input";
 // id button = "add";
@@ -52,3 +53,6 @@ function displayTasks(){
         }
     }
 }
+=======
+'use strict';
+>>>>>>> f6179fdb8e0eb0b5d1b12dccd26934b6434d2e9e
