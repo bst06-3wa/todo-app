@@ -31,7 +31,8 @@ function addTask(task){
     if(storedTasks === null){
         storedTasks = [];
     }
-    let newTask = {'taskDefinition': task, 'status' : false};
+    let length = storedTasks.length-1; // pour donner un numéro d'index cohérent
+    let newTask = {'taskIndex' : length+1,'taskDefinition': task, 'status' : false};
     storedTasks.push(newTask);
     //console.log(storedTasks);
     localStorage.setItem('tasks', JSON.stringify(storedTasks));
@@ -46,14 +47,28 @@ function displayTasks(){
     storedTasks = JSON.parse(storedTasks);
     if(storedTasks !== null){
         let length = storedTasks.length;
+        let doneTasks = [];
+        let toDoTasks = [];
         //console.log(length);
         app.innerHTML = ""; //permet de vider le contenu de la div app avant la génération de toute les tâches à chaque appel de la fonction.
-        for(let i = 0; i<length; i++){
+        for(let i = 0; i<length; i++){ //ajoute les tâches à un des deux tableaux suivant leur statut
             if(storedTasks[i]['status']){
-                app.insertAdjacentHTML('afterbegin', '<li class="task task-container"><div class="check-text"><input type="checkbox" class="checkbox" checked index = "' + i + '" status="' + storedTasks[i]['status'] + '"><p>' + storedTasks[i]['taskDefinition'] + '</p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div></li>')
+                toDoTasks.push(storedTasks[i]);
+            }
+            else {
+                doneTasks.push(storedTasks[i]);
+            }
+        }
+        let tasks = toDoTasks.concat(doneTasks);  //regroupe les 2 tableaux
+        let tasksLength = tasks.length;
+        //console.log(tasks);
+        
+        for(let i = 0; i < tasksLength; i++){
+            if(tasks[i]['status']){
+                app.insertAdjacentHTML('afterbegin', '<li class="task task-container"><div class="check-text"><input type="checkbox" class="checkbox" checked index = "' + tasks[i]['taskID'] + '" status="' + tasks[i]['status'] + '"><p>' + tasks[i]['taskDefinition'] + '</p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div></li>')
             }else{
-
-                app.insertAdjacentHTML('afterbegin', '<li class="task task-container"><div class="check-text"><input type="checkbox" class="checkbox" index = "' + i + '" status="' + storedTasks[i]['status'] + '"><p>' + storedTasks[i]['taskDefinition'] + '</p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div></li>')
+    
+                app.insertAdjacentHTML('afterbegin', '<li class="task task-container"><div class="check-text"><input type="checkbox" class="checkbox" index = "' + tasks[i]['taskIndex'] + '" status="' + tasks[i]['status'] + '"><p>' + tasks[i]['taskDefinition'] + '</p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div></li>')
             }
         }
         // ajout de l'écouteur d'évènement permettant la modification des tâches sur chacunes des checkbox
