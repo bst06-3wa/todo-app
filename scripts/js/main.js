@@ -3,14 +3,15 @@
 // id button = "add";
 // task status : 0 à faire 
 //               1 faite
+const inputAddTask = document.querySelector('#input');
+const button = document.getElementById('add');
 document.addEventListener('DOMContentLoaded', function(){
-    let app = document.getElementById('app');
-    let button = document.getElementById('add');
+    const app = document.getElementById('app');
     displayTasks();
     
     
     button.addEventListener('click', function(){
-        let inputValue = document.querySelector('#input').value;
+        let inputValue = inputAddTask.value;
         //console.log(inputValue);
         addTask(inputValue);
         displayTasks();
@@ -25,19 +26,33 @@ document.addEventListener('DOMContentLoaded', function(){
 ** newTask est push dans le tableau storedTasks et ajouté au local storage
 */
 function addTask(task){
-    let storedTasks = localStorage.getItem('tasks');
-    storedTasks = JSON.parse(storedTasks);
-    //console.log(storedTasks);
-    if(storedTasks === null){
-        storedTasks = [];
-    }
-    let length = storedTasks.length-1; // pour donner un numéro d'index cohérent
-    let newTask = {'taskIndex' : length+1,'taskDefinition': task, 'status' : false};
-    storedTasks.push(newTask);
-    //console.log(storedTasks);
-    localStorage.setItem('tasks', JSON.stringify(storedTasks));
-}
+    if(task != ""){
 
+        let storedTasks = localStorage.getItem('tasks');
+        storedTasks = JSON.parse(storedTasks);
+        //console.log(storedTasks);
+        if(storedTasks === null){
+            storedTasks = [];
+        }
+        let length = storedTasks.length-1; // pour donner un numéro d'index cohérent
+        let newTask = {'taskIndex' : length+1,'taskDefinition': task, 'status' : false};
+        storedTasks.push(newTask);
+        //console.log(storedTasks);
+        localStorage.setItem('tasks', JSON.stringify(storedTasks));
+    }else{
+        displayEmptyTaskError()
+    }
+}
+function displayEmptyTaskError(){
+    inputAddTask.style.border="1px solid red";
+    inputAddTask.style.borderRadius="5px";
+    inputAddTask.setAttribute('placeholder',"Veuillez remplir le champ avant de le soumettre");
+     
+    setTimeout(()=>{
+        inputAddTask.style.border="none";
+        inputAddTask.setAttribute('placeholder',"Add a task");
+    },4000)
+ }
 /*
 ** storedTasks récupère les tâches déjà stockés dans le local storage // ne va pas plus loin si vide
 ** récupère la longueur du tableau pour boucler et afficher les tâches 
@@ -76,11 +91,19 @@ function displayTasks(){
         for(let input of checkbox){
             input.addEventListener('click',taskDone)
         }
-        // for(let task of storedTasks){
-        //     let li = document.createElement('li');
-        //     li.classList.add('task', 'task-container');
-        //     li.innerHTML = `<div class="check-text"><input type="checkbox" class="checkbox"><p> ${task['taskDefinition']} </p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div>`;
-        //     app.appendChild(li);
-        //}
+
+        // ajout de l'écouteur d'évènement permettant la suppréssion des tâches sur chacunes des icons "trash"
+        let delBtn = document.querySelectorAll('.trash-content i')
+        for(let input of delBtn){
+            input.addEventListener('click',delTask)
+        }
+        for(let task of storedTasks){
+            let li = document.createElement('li');
+            li.classList.add('task', 'task-container');
+            li.innerHTML = `<div class="check-text"><input type="checkbox" class="checkbox"><p> ${task['taskDefinition']} </p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div>`;
+            app.appendChild(li);
+        }
     }
+
+    
 }
