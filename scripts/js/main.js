@@ -65,7 +65,7 @@ function displayTasks(){
         
         for(let i = 0; i < tasksLength; i++){
             if(tasks[i]['status']){
-                app.insertAdjacentHTML('afterbegin', '<li class="task task-container"><div class="check-text"><input type="checkbox" class="checkbox" checked index = "' + tasks[i]['taskID'] + '" status="' + tasks[i]['status'] + '"><p>' + tasks[i]['taskDefinition'] + '</p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div></li>')
+                app.insertAdjacentHTML('afterbegin', '<li class="task task-container"><div class="check-text"><input type="checkbox" class="checkbox" checked index = "' + tasks[i]['taskIndex'] + '" status="' + tasks[i]['status'] + '"><p>' + tasks[i]['taskDefinition'] + '</p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div></li>')
             }else{
     
                 app.insertAdjacentHTML('afterbegin', '<li class="task task-container"><div class="check-text"><input type="checkbox" class="checkbox" index = "' + tasks[i]['taskIndex'] + '" status="' + tasks[i]['status'] + '"><p>' + tasks[i]['taskDefinition'] + '</p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div></li>')
