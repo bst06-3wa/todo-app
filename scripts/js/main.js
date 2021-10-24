@@ -97,12 +97,12 @@ function displayTasks(){
         for(let input of delBtn){
             input.addEventListener('click',delTask)
         }
-        for(let task of storedTasks){
-            let li = document.createElement('li');
-            li.classList.add('task', 'task-container');
-            li.innerHTML = `<div class="check-text"><input type="checkbox" class="checkbox"><p> ${task['taskDefinition']} </p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div>`;
-            app.appendChild(li);
-        }
+        // for(let task of storedTasks){
+        //     let li = document.createElement('li');
+        //     li.classList.add('task', 'task-container');
+        //     li.innerHTML = `<div class="check-text"><input type="checkbox" class="checkbox"><p> ${task['taskDefinition']} </p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div>`;
+        //     app.appendChild(li);
+        // }
     }
 
     
