@@ -21,6 +21,7 @@ function taskDone(){
     localStorage.setItem('tasks',JSON.stringify(storedTasks));
     displayTasks();
 }
+
 /* 
     fonctionnant permmettant la suppréssion de tâches
 */
@@ -36,3 +37,43 @@ function delTask(){
     localStorage.setItem('tasks',JSON.stringify(storedTasks));
     displayTasks();
 }
+
+
+// ajout de l'écouteur d'évènement permettant la modification des tâches sur chacunes des tâches
+document.addEventListener('DOMContentLoaded', function(){
+    let p = document.querySelectorAll('p');
+    console.log(p);
+        for(let input of p){
+            input.addEventListener('click', editTask)
+        }
+})
+
+/* affiche un input à la place du p pour modifier le nom de la tâche
+* index = index de la tâche cliqué
+* task = nom de la tâche
+* eventlistener quand le contenu de l'input n'est plus le même
+*/
+function editTask(){
+    let index = this.parentNode.firstElementChild.getAttribute('index');
+    let task = this.parentNode.children[1].textContent
+    let p = this.parentNode.children[1];
+    p.insertAdjacentHTML('afterend', '<input type=text value="'+ task + '" id ="modify">');
+    p.setAttribute('style', 'display:none');
+    let input = this.parentNode.querySelector('input#modify')
+    /* enregistre le nom de la tâche modifiée quand le contenu de l'input n'est plus le même
+    * remplace l'input par un p avec le contenu modifiée
+    */
+    input.addEventListener('change', function(){
+        let modifiedTask = this.value;
+        p.removeAttribute('style');
+        p.textContent = modifiedTask;
+        this.parentNode.removeChild(input);
+        let storedTasks = localStorage.getItem('tasks');
+        storedTasks = JSON.parse(storedTasks);
+        storedTasks[index]['taskDefinition'] = modifiedTask;
+        localStorage.setItem('tasks',JSON.stringify(storedTasks));
+    }); 
+    
+}
+
+
