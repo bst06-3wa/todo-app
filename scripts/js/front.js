@@ -26,3 +26,33 @@ function taskDone(){
     localStorage.setItem('tasks',JSON.stringify(storedTasks));
     displayTasks();
 }
+
+document.addEventListener('DOMContentLoaded', function(){
+    let p = document.querySelectorAll('p');
+    console.log(p);
+        for(let input of p){
+            input.addEventListener('click', editTask)
+        }
+})
+
+function editTask(event){
+    let index = this.parentNode.firstElementChild.getAttribute('index');
+    let task = this.parentNode.children[1].textContent
+    let p = this.parentNode.children[1];
+    p.insertAdjacentHTML('afterend', '<input type=text value="'+ task + '" id ="modify">');
+    p.setAttribute('style', 'display:none');
+    let input = this.parentNode.querySelector('input#modify')
+    
+    input.addEventListener('change', function(event){
+        let modifiedTask = this.value;
+        p.removeAttribute('style');
+        p.textContent = modifiedTask;
+        this.parentNode.removeChild(input);
+        let storedTasks = localStorage.getItem('tasks');
+        storedTasks = JSON.parse(storedTasks);
+        storedTasks[index]['taskDefinition'] = modifiedTask;
+        localStorage.setItem('tasks',JSON.stringify(storedTasks));
+        displayTasks();
+    })
+    
+}
