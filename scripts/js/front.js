@@ -27,6 +27,7 @@ function taskDone(){
     displayTasks();
 }
 
+// ajout de l'écouteur d'évènement permettant la modification des tâches sur chacunes des tâches
 document.addEventListener('DOMContentLoaded', function(){
     let p = document.querySelectorAll('p');
     console.log(p);
@@ -35,24 +36,31 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 })
 
-function editTask(event){
+/* affiche un input à la place du p pour modifier le nom de la tâche
+* index = index de la tâche cliqué
+* task = nom de la tâche
+* eventlistener quand le contenu de l'input n'est plus le même
+*/
+function editTask(){
     let index = this.parentNode.firstElementChild.getAttribute('index');
     let task = this.parentNode.children[1].textContent
     let p = this.parentNode.children[1];
     p.insertAdjacentHTML('afterend', '<input type=text value="'+ task + '" id ="modify">');
     p.setAttribute('style', 'display:none');
     let input = this.parentNode.querySelector('input#modify')
-    
-    input.addEventListener('change', function(event){
-        let modifiedTask = this.value;
-        p.removeAttribute('style');
-        p.textContent = modifiedTask;
-        this.parentNode.removeChild(input);
-        let storedTasks = localStorage.getItem('tasks');
-        storedTasks = JSON.parse(storedTasks);
-        storedTasks[index]['taskDefinition'] = modifiedTask;
-        localStorage.setItem('tasks',JSON.stringify(storedTasks));
-        displayTasks();
-    })
-    
+    input.addEventListener('change', saveModifiedTask(index)); 
+}
+
+/* enregistre le nom de la tâche modifiée quand le contenu de l'input n'est plus le même
+*/
+function saveModifiedTask(index){
+    let modifiedTask = this.value;
+    //p.removeAttribute('style');
+    //p.textContent = modifiedTask;
+    //this.parentNode.removeChild(input);
+    let storedTasks = localStorage.getItem('tasks');
+    storedTasks = JSON.parse(storedTasks);
+    storedTasks[index]['taskDefinition'] = modifiedTask;
+    localStorage.setItem('tasks',JSON.stringify(storedTasks));
+    displayTasks();
 }
