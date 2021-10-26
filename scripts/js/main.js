@@ -29,13 +29,21 @@ function addTask(task){
     if(task != ""){
 
         let storedTasks = localStorage.getItem('tasks');
+        let newTask;
         storedTasks = JSON.parse(storedTasks);
         //console.log(storedTasks);
-        if(storedTasks === null){
+        if(storedTasks === null || storedTasks.length == 0 ){
             storedTasks = [];
+            newTask = {'taskIndex' : storedTasks.length,'taskDefinition': task, 'status' : false};
+        }else{
+            /*
+             on prend le dernier index créé et on l'incrémente de 1, de cette façon on aura jamais 
+             deux fois le même index (peut importe l'élément supprimé)
+             */
+            let index = storedTasks[storedTasks.length-1]['taskIndex'] +1; 
+            newTask = {'taskIndex' : index,'taskDefinition': task, 'status' : false};
         }
-        let length = storedTasks.length-1; // pour donner un numéro d'index cohérent
-        let newTask = {'taskIndex' : length+1,'taskDefinition': task, 'status' : false};
+        
         storedTasks.push(newTask);
         //console.log(storedTasks);
         localStorage.setItem('tasks', JSON.stringify(storedTasks));
@@ -80,10 +88,10 @@ function displayTasks(){
         
         for(let i = 0; i < tasksLength; i++){
             if(tasks[i]['status']){
-                app.insertAdjacentHTML('afterbegin', '<li class="task task-container"><div class="check-text"><input type="checkbox" class="checkbox" checked index = "' + tasks[i]['taskIndex'] + '" status="' + tasks[i]['status'] + '"><p>' + tasks[i]['taskDefinition'] + '</p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div></li>')
+                app.insertAdjacentHTML('afterbegin', '<li class="task task-container" array-position="' + i + '"><div class="check-text"><input type="checkbox" class="checkbox" checked index = "' + tasks[i]['taskIndex'] + '" status="' + tasks[i]['status'] + '"><p>' + tasks[i]['taskDefinition'] + '</p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div></li>')
             }else{
     
-                app.insertAdjacentHTML('afterbegin', '<li class="task task-container"><div class="check-text"><input type="checkbox" class="checkbox" index = "' + tasks[i]['taskIndex'] + '" status="' + tasks[i]['status'] + '"><p>' + tasks[i]['taskDefinition'] + '</p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div></li>')
+                app.insertAdjacentHTML('afterbegin', '<li class="task task-container" array-position="' + i + '"><div class="check-text" ><input type="checkbox" class="checkbox" index = "' + tasks[i]['taskIndex'] + '" status="' + tasks[i]['status'] + '"><p>' + tasks[i]['taskDefinition'] + '</p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div></li>')
             }
         }
         // ajout de l'écouteur d'évènement permettant la modification des tâches sur chacunes des checkbox
@@ -97,6 +105,12 @@ function displayTasks(){
         for(let input of delBtn){
             input.addEventListener('click',delTask)
         }
+
+         // ajout de l'écouteur d'évènement permettant la modification des tâches sur chaque p créé
+         let task = document.querySelectorAll('.check-text p')
+         for(let input of task){
+             input.addEventListener('click',editTask)
+         }
         // for(let task of storedTasks){
         //     let li = document.createElement('li');
         //     li.classList.add('task', 'task-container');
