@@ -1,9 +1,5 @@
-
 'use strict'
-//  id input = "input";
-// id button = "add";
-// task status : 0 à faire 
-//               1 faite
+
 const inputAddTask = document.querySelector('#input');
 const button = document.getElementById('add');
 let versionLabel = document.querySelector('.version')
@@ -14,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function(){
     
     button.addEventListener('click', function(){
         let inputValue = inputAddTask.value;
-        //console.log(inputValue);
         addTask(inputValue);
         displayTasks();
         inputValue = document.querySelector('#input').value = '';
@@ -45,7 +40,6 @@ function addTask(task){
         let storedTasks = localStorage.getItem('tasks');
         let newTask;
         storedTasks = JSON.parse(storedTasks);
-        //console.log(storedTasks);
         if(storedTasks === null || storedTasks.length == 0 ){
             storedTasks = [];
             newTask = {'taskIndex' : storedTasks.length,'taskDefinition': task, 'status' : false};
@@ -59,7 +53,6 @@ function addTask(task){
         }
         
         storedTasks.push(newTask);
-        //console.log(storedTasks);
         localStorage.setItem('tasks', JSON.stringify(storedTasks));
     }else{
         displayEmptyTaskError()
@@ -82,9 +75,10 @@ function displayEmptyTaskError(){
 function displayTasks(){
     let storedTasks = localStorage.getItem('tasks');
     storedTasks = JSON.parse(storedTasks);
+    let doneTasks = [];
+    let toDoTasks = [];
     if(storedTasks !== null){
         let length = storedTasks.length;
-        //console.log(length);
         app.innerHTML = ""; //permet de vider le contenu de la div app avant la génération de toute les tâches à chaque appel de la fonction.
         for(let i = 0; i<length; i++){ //ajoute les tâches à un des deux tableaux suivant leur statut
             if(storedTasks[i]['status']){
@@ -96,7 +90,6 @@ function displayTasks(){
         }
         let tasks = toDoTasks.concat(doneTasks);  //regroupe les 2 tableaux
         let tasksLength = tasks.length;
-        //console.log(tasks);
         
         for(let i = 0; i < tasksLength; i++){
             if(tasks[i]['status']){
@@ -123,12 +116,6 @@ function displayTasks(){
          for(let input of task){
              input.addEventListener('click',editTask)
          }
-        // for(let task of storedTasks){
-        //     let li = document.createElement('li');
-        //     li.classList.add('task', 'task-container');
-        //     li.innerHTML = `<div class="check-text"><input type="checkbox" class="checkbox"><p> ${task['taskDefinition']} </p></div><div class="trash-content"><i class="far fa-trash-alt"></i></div>`;
-        //     app.appendChild(li);
-        // }
     }
 
     
