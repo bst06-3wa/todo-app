@@ -1,0 +1,19 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "Petite application permettant de lister les taches à faire, de les cocher lorsqu'elles sont validée et de les supprimer",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bst06-3wa/todo-app.git"
+  },
+  "author": "Lepatron973 & CoralieCC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bst06-3wa/todo-app/issues"
+  },
+  "homepage": "https://github.com/bst06-3wa/todo-app#readme"
+}

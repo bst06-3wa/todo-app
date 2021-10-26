@@ -5,7 +5,6 @@ let app = document.querySelector('#app');
 let tasks = document.getElementsByTagName('li')
 let checkbox = document.getElementsByClassName('checkbox');
 let delBtn = document.querySelector(".trash-content i")
-
 // fonction permettant de changer le statut d'une tâche
 // l'index et le status sont directement récupérés du DOM
 // ces informations sont placé lors de la génaration des tâches

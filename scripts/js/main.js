@@ -5,6 +5,7 @@
 //               1 faite
 const inputAddTask = document.querySelector('#input');
 const button = document.getElementById('add');
+let versionLabel = document.querySelector('.version')
 document.addEventListener('DOMContentLoaded', function(){
     const app = document.getElementById('app');
     displayTasks();
@@ -17,6 +18,18 @@ document.addEventListener('DOMContentLoaded', function(){
         displayTasks();
         inputValue = document.querySelector('#input').value = '';
     });
+
+    /* 
+        petit script qui va chercher la version du projet dans package.json
+        et qui l'affiche dans le DOM
+    */
+    fetch('package.json').then((res)=>{
+        let data = res.json();
+        return data;
+    }).then(res=>{
+        console.log(versionLabel)
+        versionLabel.innerHTML = res.version;
+    })
 })
 
 
