@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function(){
         let data = res.json();
         return data;
     }).then(res=>{
-        console.log(versionLabel)
         versionLabel.innerHTML = res.version;
     })
 })
