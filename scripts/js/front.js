@@ -16,7 +16,6 @@ function taskDone(){
     let storedTasks = localStorage.getItem('tasks');
     storedTasks = JSON.parse(storedTasks);
     let index = storedTasks.findIndex(task => task.taskIndex == lastIndex);
-    console.log(index)
     storedTasks[index]['status'] = status;
     localStorage.setItem('tasks',JSON.stringify(storedTasks));
     displayTasks();
