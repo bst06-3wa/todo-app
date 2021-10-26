@@ -5,7 +5,6 @@ let app = document.querySelector('#app');
 let tasks = document.getElementsByTagName('li')
 let checkbox = document.getElementsByClassName('checkbox');
 let delBtn = document.querySelector(".trash-content i")
-
 // fonction permettant de changer le statut d'une tâche
 // l'index et le status sont directement récupérés du DOM
 // ces informations sont placé lors de la génaration des tâches
@@ -30,23 +29,16 @@ function delTask(){
         l'index est placé sur la checkbox donc je suis obligé de remonter jusqu'à l'élément parent
          le "li", pour redescendre jusqu'à la checbox et récupérer l'index
     */
+   let i= 0;
     let index = parseInt(this.parentNode.parentNode.firstElementChild.firstElementChild.getAttribute('index'));
     let storedTasks = localStorage.getItem('tasks');
     storedTasks = JSON.parse(storedTasks);
-    storedTasks.pop(storedTasks[index]);
+    indexToDel = storedTasks.findIndex(task => task.taskIndex == index);
+    storedTasks.splice(indexToDel,1);
     localStorage.setItem('tasks',JSON.stringify(storedTasks));
     displayTasks();
 }
 
-
-// ajout de l'écouteur d'évènement permettant la modification des tâches sur chacunes des tâches
-document.addEventListener('DOMContentLoaded', function(){
-    let p = document.querySelectorAll('p');
-    console.log(p);
-        for(let input of p){
-            input.addEventListener('click', editTask)
-        }
-})
 
 /* affiche un input à la place du p pour modifier le nom de la tâche
 * index = index de la tâche cliqué
@@ -75,5 +67,3 @@ function editTask(){
     }); 
     
 }
-
-
