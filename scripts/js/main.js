@@ -14,6 +14,14 @@ document.addEventListener('DOMContentLoaded', function(){
         displayTasks();
         inputValue = document.querySelector('#input').value = '';
     });
+    inputAddTask.addEventListener("keydown", (e)=>{
+        if(e.key == "Enter"){
+            let inputValue = inputAddTask.value;
+            addTask(inputValue);
+            displayTasks();
+            inputValue = document.querySelector('#input').value = '';
+        }
+    })
 
     /* 
         petit script qui va chercher la version du projet dans package.json
