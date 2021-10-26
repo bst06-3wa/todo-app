@@ -10,12 +10,13 @@ let delBtn = document.querySelector(".trash-content i")
 // ces informations sont placé lors de la génaration des tâches
 // par la fonction displayTasks
 function taskDone(){
-    let index = parseInt(this.getAttribute('index'));
+    let lastIndex = parseInt(this.getAttribute('index'));
     let status = !JSON.parse(this.getAttribute('status'));//on utilise JSON.parse pour convertir la sting en booléen et on lui affecte son nouveau statut
-    
     this.checked = status
     let storedTasks = localStorage.getItem('tasks');
     storedTasks = JSON.parse(storedTasks);
+    let index = storedTasks.findIndex(task => task.taskIndex == lastIndex);
+    console.log(index)
     storedTasks[index]['status'] = status;
     localStorage.setItem('tasks',JSON.stringify(storedTasks));
     displayTasks();
@@ -46,7 +47,7 @@ function delTask(){
 */
 
 function editTask(){
-    let index = this.parentNode.firstElementChild.getAttribute('index');
+    let lastIndex = this.parentNode.firstElementChild.getAttribute('index');
     let task = this.parentNode.children[1].textContent
     let p = this.parentNode.children[1];
     p.insertAdjacentHTML('afterend', '<input type=text value="'+ task + '" id ="modify">');
@@ -62,6 +63,7 @@ function editTask(){
         this.parentNode.removeChild(input);
         let storedTasks = localStorage.getItem('tasks');
         storedTasks = JSON.parse(storedTasks);
+        let index = storedTasks.findIndex(task => task.taskIndex == lastIndex);
         storedTasks[index]['taskDefinition'] = modifiedTask;
         localStorage.setItem('tasks',JSON.stringify(storedTasks));
     }); 
