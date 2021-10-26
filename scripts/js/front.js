@@ -29,11 +29,12 @@ function delTask(){
         l'index est placé sur la checkbox donc je suis obligé de remonter jusqu'à l'élément parent
          le "li", pour redescendre jusqu'à la checbox et récupérer l'index
     */
-    let index = parseInt(this.parentNode.parentNode.getAttribute('array-position'));
-    console.log(this.parentNode.parentNode)
+   let i= 0;
+    let index = parseInt(this.parentNode.parentNode.firstElementChild.firstElementChild.getAttribute('index'));
     let storedTasks = localStorage.getItem('tasks');
     storedTasks = JSON.parse(storedTasks);
-    storedTasks.splice(index,1);
+    indexToDel = storedTasks.findIndex(task => task.taskIndex == index);
+    storedTasks.splice(indexToDel,1);
     localStorage.setItem('tasks',JSON.stringify(storedTasks));
     displayTasks();
 }
